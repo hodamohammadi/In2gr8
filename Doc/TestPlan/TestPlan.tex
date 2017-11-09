@@ -1,0 +1,494 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\title{SE 3XA3: Test Plan}
+
+\author{Group 11, In2gr8
+		\\ Anthony Guirguis 400014834
+		\\ Hoda Mohammadi 4001407527
+		\\ Mikolaj Hrycko 400018523
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\pagenumbering{roman}
+\tableofcontents
+\listoftables
+\listoffigures
+
+\begin{table}[bp]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+October 27, 2017 & 0 & None\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\pagenumbering{arabic}
+
+\newpage
+\pagenumbering{arabic}
+\section{General Information}
+
+\subsection{Purpose}
+The purpose of the test plan is to ensure that all functional and non functional requirements of the integrate website are implemented correctly as intended in the requirement documentation. The test plan for the website is used to determine the possible tests that would be performed on the system without specifically describing each test case.
+
+\subsection{Scope}
+The test plan will cover all the mathematical functions that have been implemented and parsing of the equations, as well as the website interface. 
+
+\subsection{Acronyms, Abbreviations, and Symbols}
+
+	
+\begin{table}[hbp]
+\caption{\textbf{Table of Abbreviations}} \label{Table}
+
+\begin{tabularx}{\textwidth}{p{3cm}X}
+\toprule
+\textbf{Abbreviation} & \textbf{Definition} \\
+\midrule
+In2gr8 & Integrate(Program Name)\\
+SRS & Software Requirements Specification\\
+PoC & Proof of Concept\\
+JS & JavaScript\\
+HTML & Hypertext Markup Language\\
+OS & Operating System\\
+UI & User Interface\\
+\bottomrule
+\end{tabularx}
+
+\end{table}
+
+\begin{table}[!htbp]
+\caption{\textbf{Table of Definitions}} \label{Table}
+
+\begin{tabularx}{\textwidth}{p{3cm}X}
+\toprule
+\textbf{Term} & \textbf{Definition}\\
+\midrule
+		Structural Testing & Testing derived from the internal structure of the software. \\
+		Functional Testing & Testing derived from a description of how the program functions.  \\
+		Dynamic Testing & Testing which includes having test cases run during execution. \\
+		Static Testing & Testing that does not involve program execution.  \\
+		Manual Testing & Testing conducted by people. \\
+		Automated Testing & Testing that is run automatically by software. \\ 
+
+
+\bottomrule
+\end{tabularx}
+
+\end{table}	
+
+\subsection{Overview of Document}
+The test plan is used to document the testing process and the specific test cases and to make sure the testing is done correctly and efficiently. 
+
+\section{Plan}
+	
+\subsection{Software Description}
+Software will provide users with an online environment within which they can input mathematical expressions and equations, that will then be solved by integration, differentiation or simple calculations. The software is made available for use through a user friendly website. 
+
+\subsection{Test Team}
+The test team includes all three project members that are Anthony Guirguis, Hoda Mohammadi and Mikolaj Hrycko. 
+
+\subsection{Automated Testing Approach}
+There will be test suites for every JavaScript file created, as well as an integrated test suite for all of the files. Once a file is updated, its own test suite is run for error checking, and if everything passes, then the integrated suite is checked.
+
+\subsection{Testing Tools}
+The tool that will be used for testing the software is Mocha which is a JS testing framework that runs on node.js. 
+
+\subsection{Testing Schedule}
+		
+\href{run:./ProjectSchedule/3xa3.gan}{here}
+
+\section{System Test Description}
+	
+\subsection{Tests for Functional Requirements}
+
+\subsubsection{User Input}
+		
+\paragraph{Expression Input}
+
+\begin{enumerate}
+
+\item{FS-EI-1}
+
+Type: Static, Manual
+					
+Initial State: Website that has an input box for the expression.
+					
+Input: A set of random characters.
+					
+Output: The exact expression is used as the input for the parser function.
+					
+How test will be performed: A random expression is entered in the input box and manually checked if the exact expression is sent to the parser function as it's parameter.
+					
+
+\end{enumerate}
+\subsubsection{Input Calculation}
+		
+\paragraph{Parsing}
+
+\begin{enumerate}
+
+\item{FS-P-1}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: The parser function that takes an expression as argument.
+					
+Input: A simple expression with valid syntax
+					
+Output: An array that stores each element of the expression at a separate index.
+					
+How test will be performed: A simple expression with valid characters (numbers, operations, brackets, etc.) is used as an argument for the parser function and the output is manually checked to make sure it is an array that has each number, operation, bracket, and variable stored in order, at a separate index. 
+					
+\item{FS-P-2}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: The parser function that takes an expression as argument.
+					
+Input: A simple expression with invalid syntax
+					
+Output: An error stating the input expression contains invalid characters.
+					
+How test will be performed: A simple expression with invalid characters (such as \$, \&, {}, etc.) is used as an argument for the parser function and the output is manually checked for an error as output. 
+
+\item{FS-P-3}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: The parser function that takes an expression as argument.
+					
+Input: A complex expression with valid syntax
+					
+Output: An array that stores each element of the expression at a separate index.
+					
+How test will be performed: A complex expression with valid characters (numbers, operations, brackets, etc.) is used as an argument for the parser function and the output is manually checked to make sure it is an array that has each number, operation, bracket, and variable stored in order, at a separate index.
+\end{enumerate}
+
+\paragraph{Integration}
+\begin{enumerate}
+
+\item{FS-I-1}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: The integration function that takes a parsed array as argument.
+					
+Input: An expression parsed in an array that would require a simple integration technique to be solved.
+					
+Output: The correct integration solution to the inputed expression in form of a string. 
+					
+How test will be performed: An array composed of an expression's elements is passed on as an argument to the integration function and the returned string from the function is manually checked to see whether it was integrated correctly or not.
+					
+\item{FS-I-2}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: The integration function that takes a parsed array as argument.
+					
+Input: An expression parsed in an array that would require a complex integration technique to be solved.
+					
+Output: The correct integration solution to the inputed expression in form of a string. 
+					
+How test will be performed: An array composed of an expression's elements is passed on as an argument to the integration function and the returned string from the function is manually checked to see whether it was integrated correctly or not.
+\end{enumerate}
+
+		
+\paragraph{Differentiation}
+\begin{enumerate}
+
+\item{FS-D-1}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: The differentiation function that takes a parsed array as argument.
+					
+Input: An expression parsed in an array that would require a simple integration technique to be solved.
+					
+Output: The correct differentiation solution to the inputed expression in form of a string. 
+					
+How test will be performed: An array composed of an expression's elements is passed on as an argument to the differentiation function and the returned string from the function is manually checked to see whether it was differentiated correctly or not.
+					
+\item{FS-D-2}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: The differentiation function that takes a parsed array as argument.
+					
+Input: An expression parsed by elements in form of an array that would require a complex differentiation technique to be solved.
+					
+Output: The correct differentiation solution to the inputed expression in form of a string. 
+					
+How test will be performed: An array composed of an expression's elements is passed on as an argument to the differentiation function and the returned string from the function is manually checked to see whether it was differentiated correctly or not.
+\end{enumerate}
+
+\paragraph{Simple Calculation}
+\begin{enumerate}
+
+\item{FS-SC-1}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: The simple evaluation function that takes a parsed array as argument.
+					
+Input: An expression parsed by elements in form of an array.
+					
+Output: The correct solution to the inputed expression in form of a string. 
+					
+How test will be performed: An array composed of an expression's elements is passed on as an argument to the simple expression function and the returned string from the function is manually checked to see whether it was calculated correctly or not.
+					
+\item{FS-SC-2}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: The simple evaluation function that takes a parsed array as argument.
+					
+Input: An expression parsed by elements in form of an array that is not solvable.
+					
+Output: An error stating the equation cannot be solved. 
+					
+How test will be performed: An array composed of an expression's elements is passed on as an argument to the simple expression function and it is checked if an error is returned. 
+
+\end{enumerate}
+
+\subsection{Tests for Nonfunctional Requirements}
+
+\subsubsection{Performance}
+		
+\paragraph{Speed performance}
+
+\begin{enumerate}
+
+\item{NF-SP-1}
+
+Type: Dynamic, Manual
+					
+Initial State: Website loaded on a browser connected to an average speed internet. 
+					
+Input/Condition: Simple expression to be parsed and differentiated
+					
+Output/Result: The results returned within 2 seconds.
+					
+How test will be performed: Input the expression in the input section of the website, and wait for the expression to be parsed and differentiated and returned as output. Start a timer before input and stop after output to see whether it is under 2 seconds or not.
+
+              
+
+
+\item{NF-SP-2}
+
+Type: Dynamic, Manual
+					
+Initial State: Website loaded on a browser connected to an average speed internet. 
+					
+Input/Condition: Complex expression to be parsed and integrated
+					
+Output/Result: The results returned within 2 seconds.
+					
+How test will be performed: Input the expression in the input section of the website, and wait for the expression to be parsed and integrated and returned as output. Start a timer before input and stop after output to see whether it is under 5 seconds or not.
+\end{enumerate}
+
+\paragraph{Precision}
+
+\begin{enumerate}
+
+\item{NF-P-1}
+
+Type: Dynamic, Manual
+					
+Initial State: Website loaded on a browser 
+					
+Input/Condition: Simple expression to be parsed and evaluated with numerical evaluation function
+					
+Output/Result: The results returned with 4 decimal accuracy.
+					
+How test will be performed: Input the expression in the input section of the website and check the returned output to see whether it is accurate within 4 decimal place. 
+\end{enumerate}
+
+\subsubsection{Maintainability and Support }
+		
+\paragraph{Adaptability}
+
+\begin{enumerate}
+
+\item{NF-A-1}
+
+Type: Static, Manual
+					
+Initial State: A collection of devices with a browser and internet access. 
+					
+Input/Condition: The website URL in the browser and input a simple expression in the input box.
+					
+Output/Result: Website loaded correctly on the browser and the output is given.
+					
+How test will be performed: Load the website on many different devices and different browsers to see if the UI works on all and test a simple expression calculation to check whether the functions return the correct output on any device or browser. 
+\end{enumerate}
+\subsection{Traceability Between Test Cases and Requirements}
+              
+\section{Proof of Concept Testing}
+\subsection{Parser}
+
+\begin{enumerate}
+\item{}
+Type: Dynamic, Manual
+
+Initial State: The parser function takes a mathematical expression in the form of a string as an argument.
+
+Input: A valid mathematical expression with each term separated by a space. For example 2x + 5.
+
+Output: An array with each term in a separate index. Array = [“2”, “x”, “+”, “5”]
+
+How test will be performed: A valid mathematical expression with any combination of valid mathematical expression terms along with a space in between each term shall be inputted as a string. The parser function will then look at term separated by a space and split it up whenever the type of term changes. For example with 2x + 5, the parser will look at 2x and split them up because it’s a number and a variable. Then it will look after the space and put + and 5 in their own indices. An array with the split up values is then returned.
+
+\item{}
+Type: Dynamic, Manual
+
+Initial State: The parser function takes a mathematical expression in the form of a string as an argument.
+
+Input: A valid mathematical expression with each term separated by a space. For example \[(5x^2 + 3x + cos(2))\].
+
+Output: An array with each term in a separate index. Array = \[[“5”, “x”, "^", "2", “+”, "3", "x", "+", "cos", "(", "2", “)” ]\]
+
+How test will be performed: A valid mathematical expression with any combination of valid mathematical expression terms along with a space in between each term shall be inputted as a string. The parser function will then look at term separated by a space and split it up whenever the type of term changes. This is done the same way it was done before.
+\end{enumerate}
+
+\subsection{Integration}
+\begin{enumerate}
+\item{}
+Type: Dynamic, Manual
+
+Initial State: The integrate function, takes a mathematical expression in the form of a string as an argument which is passed on to the parser and receives an array with the parsed data.
+
+Input: A simple valid mathematical expression with each term separated by a space. For example 2x + 5.
+
+Output: The output will be \[2x^2 + 5x + C\]
+
+How test will be performed: The test will be performed by first inputting a mathematical expression in the form of a string. After parser receives the string, it sends it over to the parser function which returns a parsed array with all the data. The integrate function will then process the data and return the final answer. With the current state of the integrate function at the time of the proof of concept, the function does not automatically get simplified yet.
+
+\item{}
+Type: Dynamic, Manual
+
+Initial State: The integrate function, takes a mathematical expression in the form of a string as an argument which is passed on to the parser and receives an array with the parsed data.
+
+Input: A simple valid mathematical expression with each term separated by a space. For example \[5x^2 + 2x + 1\].
+
+Output: The output will be \[(5x^3)/3 + x^2 + x + C\]
+
+How test will be performed: The test will be performed by first inputting a mathematical expression in the form of a string. After parser receives the string, it sends it over to the parser function which returns a parsed array with all the data. The integrate function will then process the data and return the final answer. 
+
+
+\end{enumerate}
+
+\subsection{Numerical Evaluator}
+\begin{enumerate}
+\item{}
+Type: Dynamic, Manual
+
+Initial State: The numerical evaluator function, takes a mathematical expression in the form of a string as an argument which is passed on to the parser and receives an array with the parsed data.
+
+Input: A simple valid mathematical expression with each term separated by a space. For example \((2^2)/2\).
+
+Output: The output will be 2.
+
+How test will be performed: The test will be performed by first inputting a mathematical expression in the form of a string. After parser receives the string, it sends it over to the parser function which returns a parsed array with all the data. The numerical evaluator function will then process the data and return the final answer which is 2.
+
+\item{}
+Type: Dynamic, Manual
+
+Initial State: The numerical evaluator function, takes a mathematical expression in the form of a string as an argument which is passed on to the parser and receives an array with the parsed data.
+
+Input: A simple valid mathematical expression with each term separated by a space. For example \((4^2)/2\).
+
+Output: The output will be 8.
+
+How test will be performed: The test will be performed by first inputting a mathematical expression in the form of a string. After parser receives the string, it sends it over to the parser function which returns a parsed array with all the data. The numerical evaluator function will then process the data and return the final answer which is 8.
+\end{enumerate}
+				
+\section{Unit Testing Plan}
+		
+\subsection{Types of Tests}
+The unit tests will be comprised of test suites for every JavaScript file and there individual functions. They will test the functions in normal, as well as boundary cases. These tests will be automated, structural and functional tests.
+
+\subsection{Drivers}
+All files tested will have drivers in place to do unit testing, as all of them derive values from other files. The drivers will be dummy functions that contain the inputs for the files and contain the inputs for all of the tests.
+
+\subsection{Coverage Metrics}
+The test cases will be critically selected as to cover most if not all lines of code. Some tests will also be testing many functions in parallel as certain inputs may need to use a significant amount of the code to produce the output. This has the benefit of testing coverage in terms of the nested complexity of the input.
+
+\subsection{Unit testing of internal functions}
+
+\subsubsection{Parser}
+Initial State: The parser takes a mathematical expression in the form of a string as an argument.
+\newline
+
+Example Inputs Tested:
+\begin{itemize}
+\item "314159265"
+\item "x"
+\item "x\^{}2 + 3x"
+\item "cos(x)"
+\item "sin((575e\^{}(x+4) + x + 5)/2)/2"
+\end{itemize}
+
+\subsubsection{Integration}
+Initial State: The integrate function, takes a mathematical expression in the form of a string as an argument which is passed on to the parser and receives an array with the parsed data.
+\newline
+
+Example Inputs Tested:
+\begin{itemize}
+\item '2718218'
+\item 'x'
+\item 'x\^{}2', '+', '3x'
+\item " 'cos', '(', 'x', ')'"
+\end{itemize}
+
+\subsubsection{Derivation}
+Initial State: The derivative function, takes a mathematical expression in the form of a string as an argument which is passed on to the parser and receives an array with the parsed data.
+\newline
+
+Example Inputs Tested:
+\begin{itemize}
+\item '1615'
+\item 'x'
+\item 'x\^{}2', '+', '3x'
+\item " 'cos', '(', 'x', ')'"
+\item "'sin', '(', '5x', ')', 'x\^{}2' "
+\item "'sin','(','(','575e\^{}','(','x+4',')','+','x','+','5',')/2',')/2'"
+
+\end{itemize}
+\subsubsection{Simple Calculations}
+Initial State: The simple calculations takes a mathematical expression in the form of a string as an argument.
+\newline
+
+Example Inputs Tested:
+\begin{itemize}
+\item "13737 + 1"
+\item "10!"
+\item "(5\^{}10)/2"
+\item "0/0"
+\item "2\^{}0"
+\item "tan(45)"
+\item "asin(e\^{}(pi))"
+\item "-2cos((pi + pi*cos(pi))/4) + 5!/120 - cos(pi)"
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,109 @@
+\documentclass[12pt,fleqn]{article}
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{amsfonts}
+\usepackage{titling}
+\usepackage{hyperref}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+\oddsidemargin 0mm
+\evensidemargin 0mm
+\textwidth 160mm
+\textheight 200mm
+\renewcommand\baselinestretch{1.0}
+\pagestyle {plain}
+\newcounter{stepnum}
+\title{$\int_{}^{}$n2gr8 - Development Plan}
+\subtitle{Group 11}
+\author{Anthony Guirguis (guirguia) \\ Hoda Mohammadi (mohamh8) \\ Mikolaj Hrycko (hryckom)}
+
+\begin {document}
+\maketitle
+\newpage
+
+\section *{Team meeting plan}        
+The team will be meeting every Monday at 7PM at Thode Library and the role of the meeting leader and note taker will rotate between members during each meeting. At each meeting the progress of the tasks that have been started by each member will be discussed to assure the deadlines can be met and the project is moving in the right direction. Meeting minutes will be used to keep track of the meeting and assign roles to each member. 
+
+\section *{Team communication plan}
+The team will be using Git to share and commit changes to codes and documents, as well as submitting each milestone. A milestone will be considered complete when all git issues related to that milestone have been closed. A facebook group chat has been made to communicate ideas and discuss issues and changes in a faster, more efficient way. Some of the documentations will also be edited in Google Docs to allow all members to edit the document simultaneously.  
+
+\section *{Team member roles}    
+The roles and responsibilities of the members will alternate every week to ensure equal contribution from each member. 
+
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+\hline
+Member & Role & Expertise \\
+\hline
+Anthony & Leader & Technology, Documentation \\ 
+Hoda & Scribe & Latex, Technology\\ 
+Mikolaj & Contributor & Git, Documentation \\ 
+\hline
+\end{tabular}
+\end{center}
+
+
+\section *{Git work flow plan}
+\subsection*{Branching Scheme}
+For this project, the git workflow will follow a feature-release-master branch scheme. As many features are not dependant on one another, there will be many feature-branches that will be worked on at once. After a feature-branch is tested and completed it will be pushed to a release branch. Once a prescribed set of features are on the release branch, the release-branch will be tested as a whole and then pushed onto the master branch.
+
+\subsection*{Issue Tracking}
+Gits issue tracker will be used to track completed and yet to be completed features. The issues will be linked to specific milestones, which will indicate when a release branch is ready to be merged with master.
+
+\section *{Proof of concept demonstration plan}
+
+\subsection*{Most Significant Risk}
+The most significant risk of the project is whether we are able to implement certain parts of the code itself (mentioned below) and linking the code to the website and properly getting all of the inputs to be used, as well as outputting correctly.
+
+\subsection*{Will a part of the implementation be difficult?}
+The most difficult part of implementation will be whether we will find a way to be able to implement code that can identify the particular solving method that needs to be applied to the user’s input. Along with this, we will have to be able to parse the user’s mathematical equation inputs in a way that will make it easy for other functions to use the data to solve the problem at hand. If these parts of the implementation are met then no other major roadblocks are seen in project implementation. 
+
+\subsection*{Will testing be difficult?}
+Testing will not be too difficult, we just need to familiarize ourselves with the testing framework. The Mocha testing framework is easy to use, and using techniques we learned in previous classes such as creating unit tests can be used to test our code.
+
+\subsection*{Is a required library difficult to install?}
+No, for now no external library is required for project implementation.
+
+\subsection*{Will portability be a concern?}
+Portability will not be a concern as this is a browser based application. It will be able to be accessed through any platform that has a web browser. 
+
+\section *{Technology}
+
+\subsection*{Programming Language/IDE}
+The project will be using Javascript as the main programming language. React, which is a Javascript library will be used for building the user interface on the website. Eclipse Neon with will be used as the IDE where we will run our javascript code. 
+
+\subsection*{Testing Framework}
+For the testing framework, we will use Mocha which runs on Node.js. With this, we can make unit tests and run them in the terminal using npm. 
+
+\subsection*{Document generation}
+The documentation will all be written in latex and pdflatex will be used to generate the pdf.
+
+\section *{Coding style}
+General
+\begin{itemize}
+    \item camelCase for identifier names (variables and functions)
+    \item All names start with a letter
+    \item Put spaces around operators ( = + - * / ), and after commas
+    \item Tab for indentation of code blocks
+    \item End a simple statement with a semicolon
+    \item line length less than 100
+    \item Constants (like PI) written in UPPERCASE
+\end{itemize}
+\newline
+\noindent For complex statements
+\begin{itemize}
+    \item Put the opening bracket at the end of the first line
+    \item Put the closing bracket on a new line, without leading spaces
+
+\end{itemize}
+
+\section *{Project schedule}
+A detailed schedule of the project (Gantt Project) can be found \href{https://gitlab.cas.mcmaster.ca/guirguia/3XA3_Project/blob/master/ProjectSchedule/3xa3.gan}{here}.
+
+\section *{Project review}
+
+\end {document}
