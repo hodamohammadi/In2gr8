@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: IntegralEval.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: IntegralEval.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * @projectDescription	javascript script that integrates an expression
+ * 
+ * @author	Hoda Mohammadi
+ * @version	1.0
+ * 
+ * Symbols Supported:
+ * +, -, *, /, ^, !, (, )
+ * 
+ * Functions Supported:
+ * sin, cos, tan, log
+ * 
+ * Constants Supported:
+ * e
+ *
+ */
+
+
+//Global Variables
+var output = "";
+
+
+
+/**
+ * Returns a symbolic expression of the integrated input
+ * @param {Array} [inputArr] the parsed input array
+ * @param {string} [iVar] variable of integration
+ * @returns {string} [input] the integrated results
+ */
+
+function integrate(inputArr, iVar){
+
+	if (constantMultiple(inputArr)){
+		return inputArr[0] + "*(" + basics(inputArr[3, inputArr.length-2], iVar) + ")";
+	}else{
+		return basics(inputArr, iVar);
+	}
+
+}
+
+
+/**
+ * Returns a symbolic expression from simple integrartion of input
+ * @param {Array} [inputArr] the parsed input array
+ * @param {string} [iVar] variable of integration
+ * @returns {string} [input] the integrated results
+ */
+
+function basics(inputArr, iVar){
+
+	if (isConstant(inputArr[0])){
+		if (inputArr.length == 1){			//input a
+				output = inputArr[0] + "*" + iVar;	//output ax
+		}else if( inputArr[1]=="*" &amp;&amp; inputArr[2] == iVar){		//input ax
+			if (inputArr.length == 3){
+				output = "(" + inputArr[0] + "*" + iVar + "^" + 2 + ")/" + 2;	//output (ax^2)/2
+			}else if (inputArr[3] == "^"){		//input ax^
+				if (isConstant(inputArr[4])){ 		//input ax^b
+					if (inputArr.length == 5){
+							output = "(" + inputArr[0] + "*" + iVar + "^" + (parseFloat(inputArr[4])+1) + ")/" + (parseFloat(inputArr[4])+1);		//(ax^b+1)/b+1
+					}
+				}
+			}
+		}else if(inputArr[1] == "/" &amp;&amp; inputArr[2] == iVar &amp;&amp; inputArr.length == 3){		//input a*1/x
+			output = inputArr[0] + "ln |" + iVar + "|";		//output ln|x|
+		}else if(inputArr[1] == "^" &amp;&amp; inputArr[2] == iVar &amp;&amp; inputArr.length == 3){		//input a^x
+			output = inputArr[0] + "^" + iVar + "/" + "ln(" + inputArr[0] + ")"; 	//output a^x/ln(a)
+		}
+	/*
+	}else if(inputArr[0] == iVar){		//input x
+			if (inputArr.length == 1){
+				output = "(" + iVar + "^" + 2 + ")/" + 2;	//output (x^2)/2
+			}else if (inputArr[1] == "^"){		//input x^
+				if (isConstant(inputArr[2])){ 		//input x^b
+					if (inputArr.length == 3){
+							output = "(" + iVar + "^" + parseFloat(inputArr[2])+1 + ")/" + parseFloat(inputArr[2])+1;		//(x^b+1)/b+1
+					}
+				}
+			}
+	*/
+	}else if (inputArr[0] == "e" &amp;&amp; inputArr[1] == "^" &amp;&amp; inputArr[2] == iVar &amp;&amp; inputArr.length == 3){		//input e^x
+		output = "e^" + iVar;		//output e^x
+
+	}else if (inputArr[0] == "ln" &amp;&amp; inputArr[1] == iVar &amp;&amp; inputArr.length == 2){	//input ln(x)
+		output = iVar + "ln(" + iVar + ") - " + iVar;		//output xln(x) - x
+
+	}else if (inputArr[0] == "cos" &amp;&amp; inputArr[1] == iVar &amp;&amp; inputArr.length == 2){		//input cos(x)
+		output = "sin(" + iVar + ")";		//output sin(x)
+
+	}else if (inputArr[0] == "sin" &amp;&amp; inputArr[1] == iVar &amp;&amp; inputArr.length == 2){		//input sin(x)
+		output = "-cos(" + iVar + ")";		//output -cos(x)
+
+	}else if (inputArr[0] == "sec" &amp;&amp; inputArr[1] == "^" &amp;&amp; inputArr[2] == "2" &amp;&amp; inputArr[3] == iVar &amp;&amp; inputArr.length == 4){	//input sec^2(x)
+		output = "tan(" + iVar + ")";		//output tan(x)
+	}
+
+	return output + "+ C";
+
+}
+
+
+
+/**
+ * Checks whether the a constant can be extracted from the input
+ * @param {Array} [inputArr] the parsed input array
+ * @returns {boolean} [constantMult] whether input is multiplied by a constant
+ */
+
+function constantMultiple(inputArr){
+	var stack = [];
+	var constantMult = false;
+	if (isConstant(inputArr[0])){
+		if (inputArr[1] == "*" &amp;&amp; inputArr[2]=="("){
+			for (var i = 3; i &lt; inputArr.length-2; i++){
+				if(inputArr[i] == '(')
+		            stack.push(inputArr[i]);
+		        else if(inputArr[i] == ')')
+		            if(stack.length==0){
+		                constantMult = false;
+		            	break;
+
+		            }else if(stack.peek() == '('){
+		                stack.pop();
+		            }
+			}
+			if ((inputArr[inputArr.length-1] == ")")){
+				constantMult = true;
+			}
+		}
+	}
+	return constantMult;
+}
+
+
+
+/**
+ * Checks if an input array element is a constant
+ * @param {string} [elem] the element that is being checked
+ * @returns {boolean} [constant] whether the lement is constant
+ */
+function isConstant(elem){
+    var constant = true;
+    var constArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    for (var i = 0; i &lt; elem.length; i++) {
+        if (!(constArr.includes(elem[i]))){
+        	constant = false; 
+        }
+    }
+    return constant;
+}
+
+
+
+
+/**
+ * Calculates the definite integral of an expression
+ * @param {Array} [inputArr] the parsed input array
+ * @param {string} [iVar] variable of integration
+ * @param {string} [low] the lower bound
+  * @param {string} [hi] the upper bound
+ * @returns {string} an expression of the calculated definite integral
+ */
+function defIntegral(inputArr, iVar, low, hi){
+	var result = integrate(inputArr, iVar);
+	var index = 0;
+	for (var i = 0, len = result.length; i &lt; len; i++) {
+  		if (result[i]==iVar){
+  			index=i;
+  		}
+	}
+	resultLow = setCharAt(result, index,low);
+
+	resultHi = setCharAt(result, index,hi);
+	return (resultHi.substring(0, resultHi.length-3) + "-" + resultLow.substring(0, resultLow.length-3));
+
+}
+
+
+/**
+ * Plugs in the lower and upper bound numbers into the integrating variable
+ * @param {string} [str] the integrated symbolic expression 
+ * @param {int} [index] the index of the integrating variable
+ * @param {string} [chr] the number that is replacing the integrating variable
+ * @returns {string} a string with numbers plugged into the integrating variable
+ */
+
+function setCharAt(str,index,chr) {
+    if(index > str.length-1) return str;
+    return str.substr(0,index) + chr + str.substr(index+1);
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#basics">basics</a></li><li><a href="global.html#constantMultiple">constantMultiple</a></li><li><a href="global.html#defIntegral">defIntegral</a></li><li><a href="global.html#integrate">integrate</a></li><li><a href="global.html#isConstant">isConstant</a></li><li><a href="global.html#setCharAt">setCharAt</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Nov 10 2017 19:36:40 GMT-0500 (EST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

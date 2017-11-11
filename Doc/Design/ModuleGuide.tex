@@ -1,0 +1,88 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\title{SE 3XA3: Module Guide}
+
+\author{Group 11, In2gr8
+		\\ Anthony Guirguis 400014834
+		\\ Hoda Mohammadi 4001407527
+		\\ Mikolaj Hrycko 400018523
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\pagenumbering{roman}
+\tableofcontents
+\listoftables
+\listoffigures
+
+\begin{table}[bp]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+November 10, 2017 & 0 & None\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\pagenumbering{arabic}
+
+\newpage
+\pagenumbering{arabic}
+\section {Introduction}
+In2gr8 is a project where users can enter mathematical expressions and equations through an online environment which will then be solved and displayed for them. This intent of the creation of this project was to assist anyone who needed help solving complex problems with tasks such as integration.
+
+\section{Changes}
+\subsection*{Anticipated Changes}
+\begin{itemize}
+\item Website layout modifications
+\item Addition of solution explanations
+\end{itemize}
+
+\subsection*{Unlikely Changes}
+\begin{itemize}
+\item Addition of complex solving algorithims
+\item Base functionality is fundamentally changed
+\item Integrating everything without a website
+\end{itemize}
+
+\section{Module Hierarchy}
+\begin{table}[h!]
+\caption{Module Hierarchy}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Level 1} & \textbf{Level 2} & \textbf{Level 3}\\
+\hline
+Hardware-Hiding Module & Rendering Module & Derivative Module\\
+\hline
+Behaviour-Hiding Module & Initializer Module & Integral Module\\
+\hline
+Software Decision Module & Parsing Module & Numerical Module\\
+\hline
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}%
+
+
+
+\end{document}
